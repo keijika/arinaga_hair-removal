@@ -21,7 +21,7 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 100)) {
+        if (window.scrollY >= (sectionTop - 100)) {
             current = section.getAttribute('id');
         }
     });
@@ -43,15 +43,7 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '0';
-            entry.target.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                entry.target.style.transition = 'all 0.6s ease-out';
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, 100);
-            
+            entry.target.classList.add('visible');
             observer.unobserve(entry.target);
         }
     });
@@ -66,5 +58,3 @@ document.querySelectorAll('.pricing-card').forEach(card => {
 document.querySelectorAll('.package-card').forEach(card => {
     observer.observe(card);
 });
-
-console.log('有永脱毛 - Landing page loaded successfully');
